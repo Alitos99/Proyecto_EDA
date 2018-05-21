@@ -19,7 +19,9 @@ void Last_Curr ();
 void Next_Curr ();
 void Prev_Curr ();
 bool Insert_Curr ();
-// void Remove_Curr ();
-// void Get_Curr ();
+void Serch();
+dll* void Remove_Curr ();
+dll* void Get_Curr ();
+
 
 #endif /* Header_h */

@@ -51,11 +51,50 @@ Paciente Remove_Curr (dll* this){
 
 	return x;
 }
-Paciente Get_Curr (dll* this){
 
+void Serch (folio){ // Coincidencia con KEY o folio
+ 	assert (this);
+    
+    Node* it = this->first;
+    // NO PODEMOS PERDER A FIRST !!!
+    
+    if (this->first == NULL){
+        return false;
+    }
+    
+    
+    if (this->first == this->last){
+        if (this->first->info == val){
+            return true;
+        }
+    }
+    else{
+        while( it != NULL ) {
+            if( it->info == val ) {
+                return true;  //Retornar el nodo al paciente 
+            }
+            else {
+                // es sumamente peligroso hacer lo siguiente:
+                // it = it->next
+                // por eso lo hemos hecho en dos pasos
+                
+                Node* tmp = it->next;
+                it = tmp;
+            }
+        }
+    }
+    return false; // Retornamos o error (Assert)
 }
 
+dll* Get_Curr (dll* this){
+	Node* x = this -> curr -> paciente; // o info 
+	return x;
+}
 
+dll* Set_Curr (){
+	Node* x = this -> curr;
+	return x;
+} 
 
 
 
