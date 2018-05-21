@@ -7,9 +7,12 @@
 #include <assert.h>
 #include "bool.h"
 
-Struct Cursor{
-	
-}
+/*typedef struct
+{
+    Node* first;
+    Node* last;
+    Node* curr;  Esta es la que se debe de agregar a la lista (DLL)
+} dll;*/
 
 void First_Curr ();
 void Last_Curr ();
