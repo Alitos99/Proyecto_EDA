@@ -120,27 +120,44 @@ bool DLL_Insert( DLL* this, Paciente* Paciente1 )
  * @pre La lista existe; en caso contrario se dispara una aserción
  * @pre La lista no está vacía; en caso contrario se dispara una aserción
  */
-Contador* DLL_Remove( DLL* this )
+bool DLL_Remove( DLL* this )
 {
-	assert( this );
-	assert( this->first != NULL );
-
-	Pacirnte* c = this->first->info;
-
-	if( this->first == this->last ){
-		free( this->first );
-		this->first = NULL;
-		this->last = NULL;
-	}
-	else{
-		Node* tmp = this->first->next;
-		free( this->first );
-		this->first = tmp;
-		this->first->prev = NULL;
-	}
-
-	return c;
-
+    if (this->cursor->prev != NULL && this->cursor->next != NULL){
+        
+        Node* tmp1 = this->cursor->prev;
+        Node* tmp2 = this->cursor->next;
+        Paciente_Delete (this->cursor->info);
+        free (this->cursor);
+        tmp1->next = tmp2;
+        tmp2->prev = tmp1;
+        this->cursor = tmp2;
+       
+        return true;
+    }
+    else{
+        if (this->cursor->prev == NULL && this->cursor->next != NULL){
+            Node* tmp = this->cursor->next;
+            Paciente_Delete (this->cursor->info);
+            free (this->cursor);
+            tmp->prev = NULL;
+            this->first = tmp;
+            this->cursor = tmp;
+            
+            return true;
+        }
+        if (this->cursor->prev != NULL && this->cursor->next == NULL){
+            Node* tmp = this->cursor->prev;
+            Paciente_Delete (this->cursor->info);
+            free (this->cursor);
+            tmp->next = NULL;
+            this->last = tmp;
+            this->cursor = tmp;
+            
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 
